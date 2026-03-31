@@ -22,5 +22,83 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Voice agent mock — waveform (Framer-style) */
+@keyframes voice-wave-bar {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 0.95;
+  }
+}
+
+.voice-wave-bar {
+  animation: voice-wave-bar 0.85s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.voice-wave-bar--paused {
+  animation-play-state: paused;
+  opacity: 0.55;
+}
+
+/* Customer speaking — flat bars, no motion */
+.voice-wave-bar--idle {
+  transform: scaleY(0.42);
+  opacity: 0.42;
+  animation: none;
+}
+
+/* Chat demo — bubbles appear gradually */
+@keyframes chat-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-bubble-in {
+  animation: chat-bubble-in 0.45s ease-out both;
+}
+
+@keyframes chat-typing-dots {
+  0%,
+  80%,
+  100% {
+    opacity: 0.35;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+.chat-typing-dots {
+  animation: chat-typing-dots 1.2s ease-in-out infinite;
+}
+
+/* Copilot preview canvas height by breakpoint */
+.copilot-preview-frame {
+  height: 420px;
+}
+
+@media (min-width: 640px) {
+  .copilot-preview-frame {
+    height: 580px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .copilot-preview-frame {
+    height: 620px;
+  }
 }
