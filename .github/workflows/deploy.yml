@@ -22,17 +22,24 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
 
+      # ✅ Install pnpm
+      - name: Setup pnpm
+        run: npm install -g pnpm
+
+      # ✅ Install deps using pnpm
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
+      # ✅ Build
       - name: Build project
-        run: npm run build
+        run: pnpm build
 
+      # ✅ Prevent Jekyll issues
       - name: Add .nojekyll file
         run: touch out/.nojekyll
 
+      # ✅ Upload
       - name: Upload static files
         uses: actions/upload-pages-artifact@v3
         with:
